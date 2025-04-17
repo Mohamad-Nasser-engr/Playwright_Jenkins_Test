@@ -4,44 +4,27 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+                // Checkout your repository from Git
                 git 'https://github.com/Mohamad-Nasser-engr/Playwright_Jenkins_Test'
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Build') {
             steps {
                 script {
-                    // Install dependencies using npm
-                    sh 'npm install'
+                    // Compile the Java code
+                    bat 'javac D:\\eclipse-workspace\\Playwright_test\\src\\test.java'
                 }
             }
         }
 
-        stage('Run Tests') {
+        stage('Test') {
             steps {
                 script {
-                    try {
-                        // Run Playwright tests
-                        sh 'npx playwright test' // Modify this command if necessary
-                    } catch (Exception e) {
-                        currentBuild.result = 'FAILURE'
-                        throw e
-                    }
+                    // Run the Java test
+                    bat 'java -cp D:\\eclipse-workspace\\Playwright_test\\src test'
                 }
             }
-        }
-    }
-
-    post {
-        always {
-            // Cleanup actions
-            echo 'Cleaning up'
-        }
-        success {
-            echo 'Build and tests passed!'
-        }
-        failure {
-            echo 'Build or tests failed!'
         }
     }
 }
