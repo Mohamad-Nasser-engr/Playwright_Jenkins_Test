@@ -1,12 +1,5 @@
 pipeline {
     agent any
-    tools {
-        nodejs "NodeJS" // Add Node.js tool if necessary
-    }
-
-    environment {
-        // Define any necessary environment variables here
-    }
 
     stages {
         stage('Checkout') {
