@@ -1,28 +1,44 @@
 pipeline {
     agent any
+    tools {
+        nodejs "NodeJS" // Add Node.js tool if necessary
+    }
+
+    environment {
+        // Define any necessary environment variables here
+    }
+
     stages {
         stage('Checkout') {
             steps {
                 git 'https://github.com/Mohamad-Nasser-engr/Playwright_Jenkins_Test'
             }
         }
-        stage('Build') {
+
+        stage('Install Dependencies') {
             steps {
                 script {
-                    // Running Maven to install dependencies and compile the project
-                    sh 'mvn clean install'
+                    // Install dependencies using npm
+                    sh 'npm install'
                 }
             }
         }
+
         stage('Run Tests') {
             steps {
                 script {
-                    // Running tests using Maven (ensure your tests are configured in the pom.xml)
-                    sh 'mvn test'
+                    try {
+                        // Run Playwright tests
+                        sh 'npx playwright test' // Modify this command if necessary
+                    } catch (Exception e) {
+                        currentBuild.result = 'FAILURE'
+                        throw e
+                    }
                 }
             }
         }
     }
+
     post {
         always {
             // Cleanup actions
