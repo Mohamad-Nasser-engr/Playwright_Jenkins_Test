@@ -19,8 +19,8 @@ public class test {
       
       String randomEmail = "user_" + UUID.randomUUID().toString().substring(0, 8) + "@example.com";
       
-      //page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Email")).fill(randomEmail);
-      page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Email")).fill("test@example.com");
+      page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Email")).fill(randomEmail);
+      //page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Email")).fill("test@example.com");
       page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Password must be atleast 6")).click();
       page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Password must be atleast 6")).fill("test123");
       page.getByRole(AriaRole.CHECKBOX, new Page.GetByRoleOptions().setName("Selenium Grid")).check();
