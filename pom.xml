@@ -8,8 +8,8 @@
   <version>0.0.1-SNAPSHOT</version>
 
   <build>
-    <sourceDirectory>src</sourceDirectory>
-    <testSourceDirectory>src</testSourceDirectory> <!-- Add this line -->
+    <sourceDirectory>test</sourceDirectory>
+    <testSourceDirectory>test</testSourceDirectory> <!-- Add this line -->
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
