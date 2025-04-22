@@ -52,6 +52,13 @@
       <artifactId>extentreports</artifactId>
       <version>5.0.9</version>
     </dependency>
+    
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.30</version> <!-- Updated Lombok version -->
+      <scope>provided</scope> <!-- Lombok should only be available during compilation -->
+    </dependency>
 
   </dependencies>
   
