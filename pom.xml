@@ -23,29 +23,29 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.0.0-M7</version>
         <configuration>
-			
+          <!-- Parallel execution configuration -->
+          <parallel>methods</parallel> <!-- Execute test methods in parallel -->
+          <threadCount>3</threadCount> <!-- Number of parallel threads -->
+
           <includes>
             <include>**/*.java</include> 
           </includes>
-          
-          
+
+          <!-- JUnit 5 parallel execution settings -->
           <properties>
-			<property>
-			 <name>parallel</name>
-			 <value>methods</value>
-		    </property>
-		    <property>
-			 <name>threadCount</name>
-			 <value>3</value>
-		    </property>
-		    
-            <configurationParameters>
-              junit.jupiter.execution.parallel.enabled=true,
-              junit.jupiter.execution.parallel.mode.default=concurrent,
-              junit.jupiter.execution.parallel.mode.classes.default=concurrent
-            </configurationParameters>
+            <property>
+              <name>junit.jupiter.execution.parallel.enabled</name>
+              <value>true</value>
+            </property>
+            <property>
+              <name>junit.jupiter.execution.parallel.mode.default</name>
+              <value>concurrent</value>
+            </property>
+            <property>
+              <name>junit.jupiter.execution.parallel.mode.classes.default</name>
+              <value>concurrent</value>
+            </property>
           </properties>
-          
         </configuration>
       </plugin>
     </plugins>
@@ -71,19 +71,18 @@
       <version>5.8.1</version>
       <scope>test</scope>
     </dependency>
-    
+
     <dependency>
       <groupId>com.aventstack</groupId>
       <artifactId>extentreports</artifactId>
       <version>5.0.9</version>
     </dependency>
-    
+
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>1.18.30</version> <!-- Updated Lombok version -->
       <scope>provided</scope> <!-- Lombok should only be available during compilation -->
     </dependency>
-
   </dependencies>
 </project>
