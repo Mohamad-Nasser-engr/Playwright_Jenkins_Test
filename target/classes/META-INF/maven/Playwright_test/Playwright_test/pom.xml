@@ -9,7 +9,7 @@
 
   <build>
     <sourceDirectory>src</sourceDirectory>
-    <testSourceDirectory>test</testSourceDirectory> <!-- Correct the test directory -->
+    <testSourceDirectory>test</testSourceDirectory>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -23,22 +23,25 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.0.0-M7</version>
         <configuration>
-			
-			
-			
+          <parallel>methods</parallel>
+          <threadCount>4</threadCount>
           <includes>
-            <include>**/*.java</include> 
+            <include>**/*.java</include>
           </includes>
-          
-          
-          <!--<properties>
-            <configurationParameters>
-              junit.jupiter.execution.parallel.enabled=true,
-              junit.jupiter.execution.parallel.mode.default=concurrent,
-              junit.jupiter.execution.parallel.mode.classes.default=concurrent
-            </configurationParameters>
-          </properties>-->
-          
+          <properties>
+            <property>
+              <name>junit.jupiter.execution.parallel.enabled</name>
+              <value>true</value>
+            </property>
+            <property>
+              <name>junit.jupiter.execution.parallel.mode.default</name>
+              <value>concurrent</value>
+            </property>
+            <property>
+              <name>junit.jupiter.execution.parallel.mode.classes.default</name>
+              <value>concurrent</value>
+            </property>
+          </properties>
         </configuration>
       </plugin>
     </plugins>
@@ -50,33 +53,28 @@
       <artifactId>playwright</artifactId>
       <version>1.51.0</version>
     </dependency>
-
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
       <version>5.8.1</version>
       <scope>test</scope>
     </dependency>
-
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
       <version>5.8.1</version>
       <scope>test</scope>
     </dependency>
-    
     <dependency>
       <groupId>com.aventstack</groupId>
       <artifactId>extentreports</artifactId>
       <version>5.0.9</version>
     </dependency>
-    
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.18.30</version> <!-- Updated Lombok version -->
-      <scope>provided</scope> <!-- Lombok should only be available during compilation -->
+      <version>1.18.30</version>
+      <scope>provided</scope>
     </dependency>
-
   </dependencies>
 </project>
