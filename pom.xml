@@ -26,6 +26,16 @@
           <includes>
             <include>**/test_junit.java</include> <!-- Specify the test class -->
           </includes>
+          
+          
+          <properties>
+            <configurationParameters>
+              junit.jupiter.execution.parallel.enabled=true,
+              junit.jupiter.execution.parallel.mode.default=concurrent,
+              junit.jupiter.execution.parallel.mode.classes.default=concurrent
+            </configurationParameters>
+          </properties>
+          
         </configuration>
       </plugin>
     </plugins>
