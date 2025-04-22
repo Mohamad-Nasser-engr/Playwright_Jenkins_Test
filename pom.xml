@@ -8,7 +8,7 @@
   <version>0.0.1-SNAPSHOT</version>
 
   <build>
-    <sourceDirectory>test</sourceDirectory>
+    <sourceDirectory>src</sourceDirectory>
     <testSourceDirectory>test</testSourceDirectory> <!-- Add this line -->
     <plugins>
       <plugin>
