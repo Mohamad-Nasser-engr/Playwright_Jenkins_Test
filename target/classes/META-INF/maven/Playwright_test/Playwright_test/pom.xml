@@ -25,9 +25,9 @@
         <configuration>
 			
 			
-          <!--<includes>
-            <include>**/test_junit.java</include> 
-          </includes>-->
+          <includes>
+            <include>**/*.java</include> 
+          </includes>
           
           
           <properties>
