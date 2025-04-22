@@ -9,7 +9,7 @@
 
   <build>
     <sourceDirectory>src</sourceDirectory>
-    <testSourceDirectory>src/test/java</testSourceDirectory> <!-- Correct the test directory -->
+    <testSourceDirectory>test</testSourceDirectory> <!-- Correct the test directory -->
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
