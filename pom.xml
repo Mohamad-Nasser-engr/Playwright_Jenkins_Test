@@ -24,7 +24,7 @@
         <version>3.0.0-M7</version>
         <configuration>
           <includes>
-            <include>**/TestJUnit.java</include> <!-- Specify the test class -->
+            <include>**/test_junit.java</include> <!-- Specify the test class -->
           </includes>
         </configuration>
       </plugin>
