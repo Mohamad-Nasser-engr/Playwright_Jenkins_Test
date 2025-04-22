@@ -27,10 +27,18 @@
 			<parallel>methods</parallel> <!-- Run test methods in parallel -->
             <threadCount>4</threadCount> <!-- Set the number of threads for parallel execution -->
 			
-			
           <includes>
             <include>**/*.java</include> 
           </includes>
+          
+          
+          <properties>
+            <configurationParameters>
+              junit.jupiter.execution.parallel.enabled=true,
+              junit.jupiter.execution.parallel.mode.default=concurrent,
+              junit.jupiter.execution.parallel.mode.classes.default=concurrent
+            </configurationParameters>
+          </properties>
           
         </configuration>
       </plugin>
