@@ -9,7 +9,7 @@
 
   <build>
     <sourceDirectory>src</sourceDirectory>
-    <testSourceDirectory>test</testSourceDirectory> <!-- Add this line -->
+    <testSourceDirectory>src/test/java</testSourceDirectory> <!-- Correct the test directory -->
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -22,6 +22,11 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.0.0-M7</version>
+        <configuration>
+          <includes>
+            <include>**/TestJUnit.java</include> <!-- Specify the test class -->
+          </includes>
+        </configuration>
       </plugin>
     </plugins>
   </build>
@@ -61,8 +66,4 @@
     </dependency>
 
   </dependencies>
-  
-  
-
-
 </project>
