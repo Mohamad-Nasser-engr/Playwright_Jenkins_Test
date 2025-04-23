@@ -23,39 +23,37 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.0.0-M7</version>
         <configuration>
-          <properties>
-            <configurationParameters>
-              junit.jupiter.execution.parallel.enabled=true,
-              junit.jupiter.execution.parallel.mode.default=concurrent,
-              junit.jupiter.execution.parallel.mode.classes.default=concurrent
-            </configurationParameters>
-          </properties>
+          <parallel>classes</parallel>
+          <threadCount>10</threadCount>
+          
 
           <includes>
             <include>**/*.java</include> 
           </includes>
+          
+          <trimStackTrace>false</trimStackTrace>
 
         </configuration>
       </plugin>
 
       <!-- RUN JAVA TEST -->
-      <plugin>
+      <!--<plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.1.0</version>
         <executions>
           <execution>
             <id>run-main-test</id>
-            <phase>verify</phase> <!-- Run AFTER tests -->
+            <phase>verify</phase> 
             <goals>
               <goal>java</goal>
             </goals>
             <configuration>
-              <mainClass>test</mainClass> <!-- Replace with fully qualified class name if in a package -->
+              <mainClass>test</mainClass> 
             </configuration>
           </execution>
         </executions>
-      </plugin>
+      </plugin>-->
       
     </plugins>
   </build>
