@@ -31,14 +31,14 @@
             </configurationParameters>
           </properties>
 
-          <includes>
+          <!--<includes>
             <include>**/*.java</include> 
-          </includes>
+          </includes>-->
 
         </configuration>
       </plugin>
-      
-      <!--RUN JAVA TEST-->
+
+      <!-- RUN JAVA TEST -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
@@ -50,14 +50,12 @@
             <goals>
               <goal>java</goal>
             </goals>
-          <configuration>
-            <mainClass>test</mainClass> <!-- Replace with full class name if in package -->
-          </configuration>
-        </execution>
-       </executions>
+            <configuration>
+              <mainClass>test</mainClass> <!-- Replace with fully qualified class name if in a package -->
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
-
-      
       
     </plugins>
   </build>
