@@ -24,7 +24,7 @@
         <version>3.0.0-M7</version>
         <configuration>
           <!-- Parallel execution configuration -->
-          <parallel>methods</parallel> <!-- Execute test methods in parallel -->
+          <parallel>classes</parallel> <!-- Execute test methods in parallel -->
           <threadCount>3</threadCount> <!-- Number of parallel threads -->
 
           <includes>
