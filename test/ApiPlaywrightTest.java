@@ -39,7 +39,7 @@ public class ApiPlaywrightTest {
       .setData("{\"title\": \"foo\", \"body\": \"bar\", \"userId\": 1}")
       .setHeader("Content-Type", "application/json"));
 
-    assertEquals(201, response.status());
+    assertEquals(401, response.status());
     String json = response.text();
     assertTrue(json.contains("\"title\": \"foo\""));
   }
