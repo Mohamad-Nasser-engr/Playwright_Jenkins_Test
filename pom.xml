@@ -32,7 +32,8 @@
           </properties>
 
           <includes>
-            <include>**/*.java</include> 
+            <include>**/*.java</include>
+            <include>src/test.java</include> 
           </includes>
 
         </configuration>
