@@ -37,6 +37,28 @@
 
         </configuration>
       </plugin>
+      
+      <!--RUN JAVA TEST-->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <id>run-main-test</id>
+            <phase>verify</phase> <!-- Run AFTER tests -->
+            <goals>
+              <goal>java</goal>
+            </goals>
+          <configuration>
+            <mainClass>test</mainClass> <!-- Replace with full class name if in package -->
+          </configuration>
+        </execution>
+       </executions>
+      </plugin>
+
+      
+      
     </plugins>
   </build>
 

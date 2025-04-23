@@ -17,7 +17,7 @@ public class test {
       page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Name")).fill("test");
       page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Email")).click();
       
-      String randomEmail = "use_" + UUID.randomUUID().toString().substring(0, 8) + "@example.com";
+      String randomEmail = "user_" + UUID.randomUUID().toString().substring(0, 8) + "@example.com";
       
       page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Email")).fill(randomEmail);
       //page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Email")).fill("test@example.com");
