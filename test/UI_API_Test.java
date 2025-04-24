@@ -18,63 +18,49 @@ public class UI_API_Test {
 	void test(Page page) {
 		// Step 1: Navigate to the login page
 		page.navigate("https://freelance-learn-automation.vercel.app/login");
-
-		// Step 2: Fill in the email and password fields
-		page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Enter Email")).click();
-		page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Enter Email")).fill("test2@example.com");
-		page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Enter Password")).click();
-		page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Enter Password")).fill("test123");
-
 		
-		  // Step 3: Intercept the API call when clicking the "Sign in" button
+		
+		// SIGNIN API
+		// Step 3: Intercept the API call when clicking the "Sign in" button
 		  page.onRequest((Request request) -> { if
 		   (request.url().contains("/api/signin") && request.method().equals("POST")) {
 		   String requestPayload = request.postData();
 		   Assertions.assertFalse(requestPayload.isEmpty(), "Request payload should not be empty");
 		   } 
 		  });
-		 
-		// Step 4: Click the "Sign in" button and capture the API response
-		page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sign in")).click();
+		  
+				page.onResponse(response -> {
+					if (response.url().contains("/api/signin")) {
 
-		// Step 5: Verify API response and content
-		page.onResponse(response -> {
-			if (response.url().contains("/api/signin")) {
+						// Convert response body (byte[]) to string
+						byte[] bodyBytes = response.body();
+						String bodyString = new String(bodyBytes, StandardCharsets.UTF_8);
 
-				// Convert response body (byte[]) to string
-				byte[] bodyBytes = response.body();
-				String bodyString = new String(bodyBytes, StandardCharsets.UTF_8);
+						// Print the API response body
+						System.out.println("API Response Body: " + bodyString);
+						
+						// Check if the status code is 200
+						Assertions.assertEquals(200, response.status());
 
-				// Print the API response body
-				System.out.println("API Response Body: " + bodyString);
-				
-				// Check if the status code is 200
-				Assertions.assertEquals(200, response.status());
+						// Parse the response body as JSON
+						JSONObject jsonResponse = new JSONObject(bodyString);
 
-				// Parse the response body as JSON
-				JSONObject jsonResponse = new JSONObject(bodyString);
+						// Verify the token is not null or empty
+						String token = jsonResponse.getString("token");
+						Assertions.assertFalse(token.isEmpty(), "Token should not be empty");
 
-				// Verify the token is not null or empty
-				String token = jsonResponse.getString("token");
-				Assertions.assertFalse(token.isEmpty(), "Token should not be empty");
+						// Verify user email and name
+						JSONObject user = jsonResponse.getJSONObject("user");
+						String email = user.getString("email");
+						String name = user.getString("name");
 
-				// Verify user email and name
-				JSONObject user = jsonResponse.getJSONObject("user");
-				String email = user.getString("email");
-				String name = user.getString("name");
+						Assertions.assertEquals("test2@example.com", email, "Email does not match");
+						Assertions.assertEquals("test", name, "Name does not match");
 
-				Assertions.assertEquals("test2@example.com", email, "Email does not match");
-				Assertions.assertEquals("test", name, "Name does not match");
-
-			}
-		});
-
-		// Step 6: Interact with the UI (optional - depending on your test)
-		page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("menu")).click();
-		page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sign out")).click();
+					}
+				});
 		
-		
-		
+		// SIGNOUT API
 		page.onResponse(response -> {
             if (response.url().contains("/api/signout")) {
                 // Check if the status code is 200
@@ -92,8 +78,16 @@ public class UI_API_Test {
                 Assertions.assertEquals("USER SIGNOUT SUCCESFULLY", message, "Sign-out message mismatch");
             }
         });
-		page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Enter Email")).click(new Locator.ClickOptions()
-			      .setButton(MouseButton.RIGHT));
+
+		// UI Testing
+		page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Enter Email")).click();
+		page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Enter Email")).fill("test2@example.com");
+		page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Enter Password")).click();
+		page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Enter Password")).fill("test123");
+		page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sign in")).click();
+		page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("menu")).click();
+		page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sign out")).click();		
 		
+		page.waitForTimeout(2000); 
 	}
 }
