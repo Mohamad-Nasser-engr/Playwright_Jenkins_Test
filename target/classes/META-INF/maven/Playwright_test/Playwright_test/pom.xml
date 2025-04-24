@@ -91,5 +91,14 @@
       <version>1.18.30</version> <!-- Updated Lombok version -->
       <scope>provided</scope> <!-- Lombok should only be available during compilation -->
     </dependency>
+    
+    
+    
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20210307</version>
+    </dependency>
+
   </dependencies>
 </project>
