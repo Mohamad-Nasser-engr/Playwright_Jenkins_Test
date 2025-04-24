@@ -89,7 +89,7 @@ public class UI_API_Test {
                 // Check the message in the sign-out response
                 JSONObject jsonResponse = new JSONObject(bodyString);
                 String message = jsonResponse.getString("message");
-                Assertions.assertEquals("USER SIGNOUT n SUCCESFULLY", message, "Sign-out message mismatch");
+                Assertions.assertEquals("USER SIGNOUT SUCCESFULLY", message, "Sign-out message mismatch");
             }
         });
 		page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Enter Email")).click(new Locator.ClickOptions()
