@@ -21,7 +21,7 @@ public class UI_API_Test {
 		
 		
 		// SIGNIN API
-		// Step 3: Intercept the API call when clicking the "Sign in" button
+		// make sure that data is not empty
 		  page.onRequest((Request request) -> { if
 		   (request.url().contains("/api/signin") && request.method().equals("POST")) {
 		   String requestPayload = request.postData();
