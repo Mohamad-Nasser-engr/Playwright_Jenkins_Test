@@ -24,7 +24,7 @@ public class test_junit {
     page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Name")).fill("test");
     page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Email")).click();
     page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Email")).fill(randomEmail);
-    //page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Email")).fill("test2@example.com");
+    //page.getByRole(AriaRole.TEXTBOX, new  Page.GetByRoleOptions().setName("Email")).fill("test2@example.com");
     page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Password must be atleast 6")).click();
     page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Password must be atleast 6")).fill("test123");
 
