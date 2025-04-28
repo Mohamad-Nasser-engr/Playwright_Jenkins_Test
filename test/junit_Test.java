@@ -6,7 +6,7 @@ import org.junit.jupiter.api.*;
 import java.util.UUID;
 
 @UsePlaywright
-public class test_junit {
+public class junit_Test {
   @Test
   void test(Page page) {
     // Generate a random email

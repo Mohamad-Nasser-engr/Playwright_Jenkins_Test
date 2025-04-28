@@ -6,7 +6,7 @@ import org.junit.jupiter.api.*;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.*;
 
 @UsePlaywright
-public class test_junit2 {
+public class junit2_Test {
   @Test
   void test(Page page) {
     page.navigate("https://freelance-learn-automation.vercel.app/login");
