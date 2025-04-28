@@ -23,9 +23,6 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.0.0-M5</version>
         <configuration>
-          <parallel>all</parallel> <!-- Parallelize all tests -->
-          <threadCount>4</threadCount> <!-- Number of threads to use (adjust based on your system) -->
-          <useUnlimitedThreads>false</useUnlimitedThreads>
           
 
           <includes>
@@ -36,6 +33,24 @@
 
         </configuration>
       </plugin>
+      
+      <plugin>
+            <groupId>com.googlecode.maven-plugins</groupId>
+            <artifactId>maven-parallel-test-executor-plugin</artifactId>
+            <version>1.0.0</version>
+            <executions>
+                <execution>
+                    <phase>test</phase>
+                    <goals>
+                        <goal>parallel-test-execution</goal>
+                    </goals>
+                    <configuration>
+                        <threads>4</threads> <!-- Number of threads to use -->
+                        <maxForks>4</maxForks> <!-- Maximum number of test classes to run in parallel -->
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
 
       <!-- RUN JAVA TEST -->
       <!--<plugin>
