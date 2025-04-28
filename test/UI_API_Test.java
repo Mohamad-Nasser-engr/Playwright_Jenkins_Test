@@ -90,7 +90,7 @@ public class UI_API_Test {
 		
 		page.waitForTimeout(2000); 
 		try {
-		    Thread.sleep(2000);
+		    Thread.sleep(10000);
 		} catch (InterruptedException e) {
 		    e.printStackTrace();
 		}
