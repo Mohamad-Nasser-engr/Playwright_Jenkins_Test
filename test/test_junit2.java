@@ -18,5 +18,11 @@ public class test_junit2 {
     page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sign in")).click();
     assertThat(page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("error Email and Password"))).isVisible();
     
+    
+    try {
+	    Thread.sleep(2000);
+	} catch (InterruptedException e) {
+	    e.printStackTrace();
+	}
   }
 }
