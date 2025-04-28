@@ -89,11 +89,7 @@ public class UI_API_Test {
 		page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sign out")).click();		
 		
 		page.waitForTimeout(2000); 
-		try {
-		    Thread.sleep(10000);
-		} catch (InterruptedException e) {
-		    e.printStackTrace();
-		}
+		
 
 
 	}

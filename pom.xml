@@ -35,9 +35,9 @@
 				</configurationParameters>
 			</properties>
 			
-          <includes>
+          <!--<includes>
             <include>**/*.java</include> 
-          </includes>
+          </includes>-->
           
           <!--<trimStackTrace>false</trimStackTrace>-->
 

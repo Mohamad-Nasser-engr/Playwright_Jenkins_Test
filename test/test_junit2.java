@@ -19,10 +19,6 @@ public class test_junit2 {
     assertThat(page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("error Email and Password"))).isVisible();
     
     
-    try {
-	    Thread.sleep(10000);
-	} catch (InterruptedException e) {
-	    e.printStackTrace();
-	}
+    
   }
 }

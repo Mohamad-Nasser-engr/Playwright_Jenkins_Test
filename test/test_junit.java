@@ -52,11 +52,7 @@ public class test_junit {
     assertThat(page.locator("form")).containsText("Sign In");
     
     
-    try {
-	    Thread.sleep(10000);
-	} catch (InterruptedException e) {
-	    e.printStackTrace();
-	}
+    
     
   }
 }
