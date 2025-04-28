@@ -88,6 +88,6 @@ public class UI_API_Test {
 		page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("menu")).click();
 		page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sign out")).click();		
 		
-		page.waitForTimeout(2000); 
+		page.waitForTimeout(10000); 
 	}
 }

@@ -50,5 +50,9 @@ public class test_junit {
     page.getByRole(AriaRole.IMG, new Page.GetByRoleOptions().setName("menu")).click();
     page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Sign out")).click();
     assertThat(page.locator("form")).containsText("Sign In");
+    
+    
+    
+    page.waitForTimeout(10000);
   }
 }
