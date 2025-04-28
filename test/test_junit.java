@@ -52,7 +52,5 @@ public class test_junit {
     assertThat(page.locator("form")).containsText("Sign In");
     
     
-    
-    page.waitForTimeout(10000);
   }
 }
