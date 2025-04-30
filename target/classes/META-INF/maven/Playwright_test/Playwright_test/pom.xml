@@ -35,9 +35,9 @@
 				</configurationParameters>
 			</properties>
 			
-          <includes>
-            <include>ApiPlaywrightTest.java</include> 
-          </includes>
+          <!--<includes>
+            <include>**/*.java</include> 
+          </includes>-->
           
           <!--<trimStackTrace>false</trimStackTrace>-->
 
