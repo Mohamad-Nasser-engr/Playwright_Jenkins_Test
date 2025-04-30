@@ -53,9 +53,7 @@ public class junit2_Test {
 
       assertThat(page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("error Email and Password"))).isVisible();
 
-      Thread.sleep(10000); // Optional: just for observation
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
+      
+    } 
   }
 }

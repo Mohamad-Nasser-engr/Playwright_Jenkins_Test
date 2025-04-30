@@ -23,8 +23,8 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.0.0-M5</version>
         <configuration>
-			
-			
+			 <argLine>--add-opens java.base/sun.nio.fs=ALL-UNNAMED</argLine>
+			<properties>
 				<configurationParameters>
 					junit.jupiter.execution.parallel.enabled=true 
 					junit.jupiter.execution.parallel.mode.default=concurrent
@@ -33,11 +33,11 @@
 					junit.jupiter.execution.parallel.config.strategy=dynamic 
 					junit.jupiter.execution.parallel.config.dynamic.factor=0.5
 				</configurationParameters>
+			</properties>
 			
-			
-          <!--<includes>
-            <include>**/*.java</include> 
-          </includes>-->
+          <includes>
+            <include>ApiPlaywrightTest.java</include> 
+          </includes>
           
           <!--<trimStackTrace>false</trimStackTrace>-->
 
