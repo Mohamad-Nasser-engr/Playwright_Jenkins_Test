@@ -24,7 +24,7 @@ Compared to traditional tools like **Selenium**, Playwright offers:
 
 ## 🧪 Technology Stack
 
-- **Playwright** v1.44.0 (Java binding)
+- **Playwright** v1.51.0 (Java binding)
 - **Java** 17
 - **JUnit 5**
 - **Maven** (for project and dependency management)
@@ -33,20 +33,34 @@ Compared to traditional tools like **Selenium**, Playwright offers:
 
 ## ⚙️ Installation & Setup
 
-### 1. Add Playwright to your Maven `pom.xml`:
+### 1. Add Playwright and Junit 5 to your Maven `pom.xml`:
 
 ```xml
 <dependency>
   <groupId>com.microsoft.playwright</groupId>
   <artifactId>playwright</artifactId>
-  <version>1.44.0</version>
+  <version>1.51.0</version>
+</dependency>
+<dependency>
+  <groupId>org.junit.jupiter</groupId>
+  <artifactId>junit-jupiter-api</artifactId>
+  <version>5.8.1</version>
+  <scope>test</scope>
+</dependency>
+<dependency>
+  <groupId>org.junit.jupiter</groupId>
+  <artifactId>junit-jupiter-engine</artifactId>
+  <version>5.8.1</version>
+  <scope>test</scope>
 </dependency>
 ```
 ### 2. Install Playwright recorder
+This step uses the Node.js version of Playwright **only to record and generate Java test code.**
 ```
 npx playwright install 
 ```
-### Use Playwright's recorder 
+### 3. Use Playwright's recorder 
+This will generate Java + JUnit code you can paste into your test classes.
 ```
 npx playwright codegen https://example.com
 ```
