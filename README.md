@@ -64,3 +64,26 @@ This will generate Java + JUnit code you can paste into your test classes.
 ```bash
 npx playwright codegen https://example.com
 ```
+---
+## Integration with Jenkins 
+To integrate your Playwright tests with Jenkins, follow these steps to set up a continuous integration (CI) pipeline that automatically runs your tests.
+### 1. Install Jenkins
+### 2. Install Required PlugIns
+Ensure the following plugins are installed (Manage Jenkins → Manage Plugins):
+- Git Plugin – For Git integration
+- GitHub Plugin – For GitHub webhooks and integration
+- JUnit – To publish test results
+- Maven Integration – To build Maven projects
+### 3. Create and configure a new Maven Project:
+- In Jenkins, click New Item, name your job, and select Maven Project.
+- Under Source Code Management, select Git and enter your GitHub repository URL.
+- In the Build section:
+  Root POM:
+  ```
+  pom.xml
+  ```
+  Goals and Options:
+  ```
+  clean install
+  ```
+  This runs your tests based on the pom.xml configuration.
