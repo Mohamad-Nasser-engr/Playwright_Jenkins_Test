@@ -15,11 +15,6 @@ Playwright is an open-source test automation framework by Microsoft that support
 - Auto-wait and smart assertions
 - **Recorder tool to auto-generate tests**
 
-Compared to traditional tools like **Selenium**, Playwright offers:
-- Better support for modern web apps (e.g., React, Angular)
-- Fewer flaky tests due to built-in waiting
-- A faster, simpler test setup
-
 ---
 
 ## 🧪 Technology Stack
@@ -64,7 +59,9 @@ This will generate Java + JUnit code you can paste into your test classes.
 ```bash
 npx playwright codegen https://example.com
 ```
+
 ---
+
 ## Integration with Jenkins 
 To integrate your Playwright tests with Jenkins, follow these steps to set up a continuous integration (CI) pipeline that automatically runs your tests.
 ### 1. Install Jenkins
@@ -103,7 +100,9 @@ Ensure the following plugins are installed (Manage Jenkins → Manage Plugins):
     ```
   - The junit-jupiter-api and junit-jupiter-engine dependencies are declared with <scope>test</scope>, so tests can be discovered and run correctly.
   - Ensure your test classes follow the naming convention ***Test.java** so Surefire can detect them. If not, update includes in the plugin config.
+
 ---
+
 ## Jenkins Integration with JIRA
 Integrating Jenkins with JIRA allows automatic linking of build results, commits, and issues, making it easier to track development progress directly from JIRA.
 ### Steps to integrate Jenkins with JIRA
