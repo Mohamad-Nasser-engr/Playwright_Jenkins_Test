@@ -78,6 +78,7 @@ Ensure the following plugins are installed (Manage Jenkins → Manage Plugins):
 - In Jenkins, click New Item, name your job, and select Maven Project.
 - Under Source Code Management, select Git and enter your GitHub repository URL.
 - In the Build section:
+
   Root POM:
   ```
   pom.xml
