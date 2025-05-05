@@ -55,12 +55,12 @@ Compared to traditional tools like **Selenium**, Playwright offers:
 </dependency>
 ```
 ### 2. Install Playwright recorder
-This step uses the Node.js version of Playwright **only to record and generate Java test code.**
-```
+This step installs Playwright using the Node.js version, which is required to record and generate Java test code.
+```bash
 npx playwright install 
 ```
 ### 3. Use Playwright's recorder 
 This will generate Java + JUnit code you can paste into your test classes.
-```
+```bash
 npx playwright codegen https://example.com
 ```
