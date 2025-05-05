@@ -103,4 +103,23 @@ Ensure the following plugins are installed (Manage Jenkins → Manage Plugins):
     ```
   - The junit-jupiter-api and junit-jupiter-engine dependencies are declared with <scope>test</scope>, so tests can be discovered and run correctly.
   - Ensure your test classes follow the naming convention ***Test.java** so Surefire can detect them. If not, update includes in the plugin config.
+---
+## Jenkins Integration with JIRA
+Integrating Jenkins with JIRA allows automatic linking of build results, commits, and issues, making it easier to track development progress directly from JIRA.
+### Steps to integrate Jenkins with JIRA
+### 1. Install the Jenkins JIRA Plugin
+- Go to Manage Jenkins → Manage Plugins
+- Under the Available tab, search for and install JIRA Plugin
+- Restart Jenkins if prompted
+### 2. Configure JIRA site in Jenkins
+- Go to Manage Jenkins → Configure System
+- Scroll to the JIRA section
+- Click Add Jira Site
+    - Enter the JIRA server URL (e.g., https://yourcompany.atlassian.net)
+    - Add credentials (API token for Atlassian Cloud accounts)
+    - Test the connection
+### 3. Link JIRA site in a Jenkins Job
+- Open your Jenkins Job → Configure
+- Scroll to the JIRA site section
+- Select the JIRA site you previously configured
   
