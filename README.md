@@ -102,5 +102,5 @@ Ensure the following plugins are installed (Manage Jenkins → Manage Plugins):
     </plugin>
     ```
   - The junit-jupiter-api and junit-jupiter-engine dependencies are declared with <scope>test</scope>, so tests can be discovered and run correctly.
-  - Ensure your test classes follow the naming convention **'*Test.java'** so Surefire can detect them. If not, update includes in the plugin config.
+  - Ensure your test classes follow the naming convention ***Test.java** so Surefire can detect them. If not, update includes in the plugin config.
   
