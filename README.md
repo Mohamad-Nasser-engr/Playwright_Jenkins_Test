@@ -87,4 +87,20 @@ Ensure the following plugins are installed (Manage Jenkins → Manage Plugins):
   ```
   clean install
   ```
-  This runs your tests based on the pom.xml configuration.
+  This runs your tests based on the pom.xml configuration.\
+  ### Note on ***pom.xml*** for Jenkins Compatibility:
+  To ensure Jenkins can execute your Playwright tests via Maven:
+  - The project defines maven-surefire-plugin, which runs JUnit 5 tests during the test phase:
+    ```xml
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-surefire-plugin</artifactId>
+      <version>3.0.0-M5</version>
+      <configuration>
+      ...
+      </configuration>
+    </plugin>
+    ```
+  - The junit-jupiter-api and junit-jupiter-engine dependencies are declared with <scope>test</scope>, so tests can be discovered and run correctly.
+  - Ensure your test classes follow the naming convention **'*Test.java'** so Surefire can detect them. If not, update includes in the plugin config.
+  
