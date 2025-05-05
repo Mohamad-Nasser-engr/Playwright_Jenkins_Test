@@ -2,7 +2,7 @@
 
 ## 🧩 Overview
 
-This document summarizes my research as a DevOps intern on using [Microsoft Playwright](https://playwright.dev/java/) for end-to-end testing with **Java** and **JUnit**. It focuses on how Playwright can facilitate rapid test creation via its **codegen recorder**, and how it fits into modern DevOps pipelines.
+This document summarizes my research on using [Microsoft Playwright](https://playwright.dev/java/) for end-to-end testing with **Java** and **JUnit**. It focuses on how Playwright can facilitate rapid test creation via its **codegen recorder**, and how it fits into modern DevOps pipelines.
 
 ---
 
@@ -41,3 +41,12 @@ Compared to traditional tools like **Selenium**, Playwright offers:
   <artifactId>playwright</artifactId>
   <version>1.44.0</version>
 </dependency>
+```
+### 2. Install Playwright recorder
+```
+npx playwright install 
+```
+### Use Playwright's recorder 
+```
+npx playwright codegen https://example.com
+```
