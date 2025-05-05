@@ -65,7 +65,7 @@ npx playwright codegen https://example.com
 ## Integration with Jenkins 
 To integrate your Playwright tests with Jenkins, follow these steps to set up a continuous integration (CI) pipeline that automatically runs your tests.
 ### 1. Install Jenkins
-### 2. Install Required PlugIns
+### 2. Install Required Plugins
 Ensure the following plugins are installed (Manage Jenkins → Manage Plugins):
 - Git Plugin – For Git integration
 - GitHub Plugin – For GitHub webhooks and integration
@@ -84,7 +84,7 @@ Ensure the following plugins are installed (Manage Jenkins → Manage Plugins):
   ```
   clean install
   ```
-  This runs your tests based on the pom.xml configuration.\
+  This runs your tests based on the pom.xml configuration.
   ### Note on ***pom.xml*** for Jenkins Compatibility:
   To ensure Jenkins can execute your Playwright tests via Maven:
   - The project defines maven-surefire-plugin, which runs JUnit 5 tests during the test phase:
