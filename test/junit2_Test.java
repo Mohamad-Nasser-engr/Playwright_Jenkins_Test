@@ -46,7 +46,7 @@ public class junit2_Test {
       BrowserContext context = browser.newContext();
       Page page = context.newPage();
 
-      //page.navigate("https://freelance-learn-automation.vercel.app/login");
+      page.navigate("https://freelance-learn-automation.vercel.app/login");
       page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Enter Email")).fill("test123@gmail.com");
       //page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Enter Email")).fill("test2@gmail.com");
       page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Enter Password")).fill("test123");
