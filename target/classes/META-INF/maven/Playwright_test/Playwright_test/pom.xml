@@ -36,9 +36,9 @@
 				</configurationParameters>
 			</properties>
 			
-          <!--<includes>
-            <include>**/*.java</include> 
-          </includes>-->
+          <includes>
+            <include>**/junit2_Test.java</include> 
+          </includes>
           
           <!--<trimStackTrace>false</trimStackTrace>-->
 
