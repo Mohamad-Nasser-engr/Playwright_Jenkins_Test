@@ -37,7 +37,7 @@
 			</properties>
 			
           <includes>
-            <include>**/junit2_Test.java</include> 
+            <include>**/*_Test.java</include> 
           </includes>
           
           <!--<trimStackTrace>false</trimStackTrace>-->
