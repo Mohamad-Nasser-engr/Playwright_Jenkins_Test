@@ -93,7 +93,8 @@ public class junit_Test {
       assertThat(page.locator("form")).containsText("Sign Up");
 
       page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Name")).fill("test");
-      page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Email")).fill(randomEmail);
+      //page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Email")).fill(randomEmail);
+      page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Email")).fill("test2@example.com");
       page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions().setName("Password must be atleast 6")).fill("test123");
 
       page.getByRole(AriaRole.CHECKBOX, new Page.GetByRoleOptions().setName("Java")).check();
