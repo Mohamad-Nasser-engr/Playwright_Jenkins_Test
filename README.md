@@ -113,11 +113,11 @@ Integrating Jenkins with JIRA allows automatic linking of build results, commits
 ### 2. Create a JIRA API Token (for Atlassian Cloud users)
 If you're using Atlassian Cloud, you need an API token to authenticate Jenkins.
 To generate one:
-1. Visit https://id.atlassian.com/manage/api-tokens
-2. Click Create API token
-3. Enter a label like "Jenkins Integration", then click Create
-4. Copy the generated token (you won’t be able to view it again)
-5. In Jenkins:
+- Visit https://id.atlassian.com/manage/api-tokens
+- Click Create API token
+- Enter a label like "Jenkins Integration", then click Create
+- Copy the generated token (you won’t be able to view it again)
+- In Jenkins:
    - Go to Manage Jenkins → Credentials
    - Click **Add Credentials**
      - **Kind**: Username with password
