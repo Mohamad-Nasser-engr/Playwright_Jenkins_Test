@@ -147,16 +147,26 @@ To generate one:
 
 ---
 
-## Xray:
-### 1. Install the Xray Plugin in Jenkins
+## Xray Integration for Test Management:
+Xray is a powerful test management tool for Jira that allows teams to manage automated and manual tests directly from within Jira. We integrate Xray with Jenkins to automatically import test execution results, enabling traceability between test runs and Jira issues.
+Using Xray ensures full visibility into testing status within Jira
+
+Pricing: Xray for Jira Cloud is a paid add-on, with pricing starting at $10/month for up to 10 users. Larger teams incur additional costs.
+
+### 1. Install the Xray App in JIRA:
+- In Jira, go to Apps → Explore more apps
+- Search for Xray Test Management for Jira
+- Click Install
+- Once installed, it will appear in the Apps section
+### 2. Install the Xray Plugin in Jenkins
 - Navigate to Jenkins Dashboard → Manage Jenkins → Plugins.
 - Search for Xray and install the plugin.
 - Restart Jenkins if required.
-### 2. Create API Credentials in Jira:
+### 3. Create API Credentials in Jira:
 - In Jira, go to Apps → Manage Apps → API Keys.
 - Click Create API Key.
 - Give it a name, and copy the generated key for later use.
-### 3. Configure Xray in Jenkins:
+### 4. Configure Xray in Jenkins:
 - Go to Manage Jenkins → System → Configure System.
 - Scroll to the Xray Configuration section.
 - Fill in the following:
@@ -164,7 +174,7 @@ To generate one:
   - Hosting Type: Select Cloud.
   - Credentials: Add the API Key from Step 2 as a new credential.
 - Click Test Connection to ensure everything works correctly.
-### 4. Add Xray Reporting in a Jenkins Job:
+### 5. Add Xray Reporting in a Jenkins Job:
 - Open your Jenkins job and click Configure.
 - Under Post-build Actions, click Add post-build action → Select Xray: Results Import Task.
 - Set the following options:
