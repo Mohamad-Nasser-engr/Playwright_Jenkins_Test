@@ -112,7 +112,6 @@ Integrating Jenkins with JIRA allows automatic linking of build results, commits
 - Restart Jenkins if prompted
 ### 2. Create a JIRA API Token (for Atlassian Cloud users)
 If you're using Atlassian Cloud, you need an API token to authenticate Jenkins.
-
 To generate one:
 1. Visit https://id.atlassian.com/manage/api-tokens
 2. Click Create API token
@@ -136,4 +135,34 @@ To generate one:
 - Open your Jenkins Job → Configure
 - Scroll to the JIRA site section
 - Select the JIRA site you previously configured
+
+---
+
+## Xray:
+### 1. Install the Xray Plugin in Jenkins
+- Navigate to Jenkins Dashboard → Manage Jenkins → Plugins.
+- Search for Xray and install the plugin.
+- Restart Jenkins if required.
+### 2. Create API Credentials in Jira:
+- In Jira, go to Apps → Manage Apps → API Keys.
+- Click Create API Key.
+- Give it a name, and copy the generated key for later use.
+### 3. Configure Xray in Jenkins:
+- Go to Manage Jenkins → System → Configure System.
+- Scroll to the Xray Configuration section.
+- Fill in the following:
+  - Configuration Alias: Choose JIRA Cloud.
+  - Hosting Type: Select Cloud.
+  - Credentials: Add the API Key from Step 2 as a new credential.
+- Click Test Connection to ensure everything works correctly.
+### 4. Add Xray Reporting in a Jenkins Job:
+- Open your Jenkins job and click Configure.
+- Under Post-build Actions, click Add post-build action → Select Xray: Results Import Task.
+- Set the following options:
+  - Instance: Choose JIRA Cloud.
+  - Format: Choose JUnit XML.
+  - Execution Report File: Enter your test report path (e.g., target/surefire-reports/*.xml).
+  - JIRA Project Key: Enter the Jira project key (e.g., ABC).
+  - Test Execution Key: Enter the corresponding Test Execution issue key (e.g., ABC-123).
+
   
