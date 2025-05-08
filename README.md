@@ -6,6 +6,15 @@ This document summarizes my research on using [Microsoft Playwright](https://pla
 
 ---
 
+## 🔧 Prerequisites
+- Java 
+- Node.js installed (for Playwright CLI tools)
+- Maven installed
+- Jenkins server set up
+- JIRA Cloud account with admin access
+
+---
+
 ## 🚀 Why Playwright?
 
 Playwright is an open-source test automation framework by Microsoft that supports:
