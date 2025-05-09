@@ -78,7 +78,7 @@ To integrate your Playwright tests with Jenkins, follow these steps to set up a 
 - Create a GitHub repository
 - Clone it:
   ```bash
-  git clone https://github.com/your-username/playwright-java-tests.git
+  git clone https://github.com/your-username/repository-name.git
   cd playwright-java-tests
   ```
 - Add your Maven project files (pom.xml, etc)
@@ -86,9 +86,23 @@ To integrate your Playwright tests with Jenkins, follow these steps to set up a 
   ```bash
   git add .
   git commit -m "Initial Playwright test setup"
-  git push origin main
+  git push -u origin
   ```
-### 2. Install Jenkins
+### 2. Install Jenkins on Windows:
+- Go to https://www.jenkins.io/download/
+- Download the .msi installer
+- Run the installer and follow the setup wizard
+- Jenkins will install as a Windows service (default port: 8080 or custom one like 8443)
+Now you can access Jenkins by going to the following url:
+```
+http://localhost:<port-number>
+```
+- The first time you access Jenkins, it will ask for a password which can be found in this file:
+  ```
+  <Jenkins-installation-path>/secrets/initialAdminPassword
+  ```
+- Finalize Jenkins Setup
+  
 ### 3. Install Required Plugins
 Ensure the following plugins are installed (Manage Jenkins → Manage Plugins):
 - Git Plugin – For Git integration
@@ -206,7 +220,7 @@ Pricing: Xray for Jira Cloud is a paid add-on, with pricing starting at $10/mont
 - Fill in the following:
   - Configuration Alias: Choose JIRA Cloud.
   - Hosting Type: Select Cloud.
-  - Credentials: Add the API Key from Step 2 as a new credential.
+  - Credentials: Add the API Key from Step 3 as a new credential.
 - Click Test Connection to ensure everything works correctly.
 ### 5. Add Xray Reporting in a Jenkins Job:
 - Open your Jenkins job and click Configure.
@@ -222,10 +236,67 @@ Pricing: Xray for Jira Cloud is a paid add-on, with pricing starting at $10/mont
 
 ## Manually Trigerring Jenkins Jobs From JIRA:
 Manually triggering Jenkins jobs directly from JIRA allows QA or developers to initiate specific builds without switching context. This setup can be useful for on-demand testing or non-automated flows.
-### 1. ngrok
-### 2. Jenkins API
-### 3. encode jenkins username:jenkinsapi to base 64
-### 4. JIRA RULE
+
+*Note: This section assumes you have already set up your Jenkins API token and exposed Jenkins via an ngrok URL as described in the earlier sections.*
+
+### Steps to Setup JIRA Automation Rule:
+- Navigate to JIRA Automation
+  - Go to your JIRA project → Project Settings → Automation → Create Rule
+- Configure the Trigger
+  - Select Manual trigger as the rule trigger
+  - his allows users to run the rule from a JIRA issue manually
+- Add an Action: Send Web Request
+  - Choose Send web request as the action
+- Fill in Web Request Details:
+  - Web Request URL:
+    ```
+    https://<your-ngrok-url>/job/<jenkins-job-name>/build?token=<my-trigger-token>
+    ```
+  Note: You must first enable the remote trigger in your Jenkins job:
+  - Go to the Jenkins job → Configure
+  - Check "Trigger builds remotely"
+  - Set your Authentication Token (e.g., my-trigger-token)
+- HTTP Method: POST
+- Headers
+  - Key 1: Authorization:
+    ```
+    Basic <base64_encoded_credentials>
+    ```
+    Replace with *base64-encoded string* of jenkins-username:jenkins-api-token
+  - Key 2: Jenkins-Crumb:
+    ```
+    <crumb-value>
+    ```
+    To get the crumb use the following command:
+    ```
+    curl -u jenkinsuser:jenkins-api-token https://<your-ngrok-url>/crumbIssuer/api/json
+    ```
+    The response will be a JSON Object:
+    ```
+    {
+     "crumb": "abc123...",
+     "crumbRequestField": "Jenkins-Crumb"
+    }
+    ```
+    Use the value of "crumb" as the header value, and make sure the key matches "crumbRequestField".
+
+### Using The Automation Rule:
+Once the rule is set up:
+- Open any JIRA Issue
+- Select Actions
+- Select the created Automation Rule to trigger the Jenkins job
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   
