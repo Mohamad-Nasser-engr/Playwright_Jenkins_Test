@@ -73,6 +73,21 @@ npx playwright codegen https://example.com
 
 ## Integration with Jenkins 
 To integrate your Playwright tests with Jenkins, follow these steps to set up a continuous integration (CI) pipeline that automatically runs your tests.
+
+### Setup a GitHub Repository
+- Create a GitHub repository
+- Clone it:
+  ```bash
+  git clone https://github.com/your-username/playwright-java-tests.git
+  cd playwright-java-tests
+  ```
+- Add your Maven project files (pom.xml, etc)
+- Commit and push:
+  ```bash
+  git add .
+  git commit -m "Initial Playwright test setup"
+  git push origin main
+  ```
 ### 1. Install Jenkins
 ### 2. Install Required Plugins
 Ensure the following plugins are installed (Manage Jenkins → Manage Plugins):
@@ -110,6 +125,25 @@ Ensure the following plugins are installed (Manage Jenkins → Manage Plugins):
   - The junit-jupiter-api and junit-jupiter-engine dependencies are declared with <scope>test</scope>, so tests can be discovered and run correctly.
   - Ensure your test classes follow the naming convention ***Test.java** so Surefire can detect them. If not, update includes in the plugin config.
 
+### Expose Jenkins to GitHub using ngrok (for Webhooks):
+If Jenkins is hosted locally (e.g., on http://localhost:8443), GitHub won’t be able to trigger webhooks unless it's exposed to the internet. To solve this we use ngrok:
+- Install ngrok
+- Start it:
+```bash
+ngrok http 8443
+```
+This will give you a public URL like https://a1b2c3d4.ngrok.io
+
+- In GitHub:
+   - Go to your repository → Settings → Webhooks → Add webhook
+   - Payload URL: https://a1b2c3d4.ngrok.io/github-webhook/
+   - Content type: application/json
+   - Events: Choose “Just the push event”
+- In Jenkins:
+   - Make sure your job is configured to trigger builds on GitHub push events
+- Push a change to test the setup
+  
+⚠️ Note: ngrok URLs expire unless you use a paid plan or reserved domain.
 ---
 
 ## Jenkins Integration with JIRA
@@ -183,5 +217,15 @@ Pricing: Xray for Jira Cloud is a paid add-on, with pricing starting at $10/mont
   - Execution Report File: Enter your test report path (e.g., target/surefire-reports/*.xml).
   - JIRA Project Key: Enter the Jira project key (e.g., ABC).
   - Test Execution Key: Enter the corresponding Test Execution issue key (e.g., ABC-123).
+ 
+--- 
+
+## Manually Trigerring Jenkins Jobs From JIRA:
+Manually triggering Jenkins jobs directly from JIRA allows QA or developers to initiate specific builds without switching context. This setup can be useful for on-demand testing or non-automated flows.
+### 1. ngrok
+### 2. Jenkins API
+### 3. encode jenkins username:jenkinsapi to base 64
+### 4. JIRA RULE
+
 
   
