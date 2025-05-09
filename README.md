@@ -74,7 +74,7 @@ npx playwright codegen https://example.com
 ## Integration with Jenkins 
 To integrate your Playwright tests with Jenkins, follow these steps to set up a continuous integration (CI) pipeline that automatically runs your tests.
 
-### Setup a GitHub Repository
+### 1. Setup a GitHub Repository
 - Create a GitHub repository
 - Clone it:
   ```bash
@@ -88,14 +88,14 @@ To integrate your Playwright tests with Jenkins, follow these steps to set up a 
   git commit -m "Initial Playwright test setup"
   git push origin main
   ```
-### 1. Install Jenkins
-### 2. Install Required Plugins
+### 2. Install Jenkins
+### 3. Install Required Plugins
 Ensure the following plugins are installed (Manage Jenkins → Manage Plugins):
 - Git Plugin – For Git integration
 - GitHub Plugin – For GitHub webhooks and integration
 - JUnit – To publish test results
 - Maven Integration – To build Maven projects
-### 3. Create and configure a new Maven Project:
+### 4. Create and configure a new Maven Project:
 - In Jenkins, click New Item, name your job, and select Maven Project.
 - Under Source Code Management, select Git and enter your GitHub repository URL.
 - In the Build section:
@@ -125,7 +125,7 @@ Ensure the following plugins are installed (Manage Jenkins → Manage Plugins):
   - The junit-jupiter-api and junit-jupiter-engine dependencies are declared with <scope>test</scope>, so tests can be discovered and run correctly.
   - Ensure your test classes follow the naming convention ***Test.java** so Surefire can detect them. If not, update includes in the plugin config.
 
-### Expose Jenkins to GitHub using ngrok (for Webhooks):
+### 5. Expose Jenkins to GitHub using ngrok (for Webhooks):
 If Jenkins is hosted locally (e.g., on http://localhost:8443), GitHub won’t be able to trigger webhooks unless it's exposed to the internet. To solve this we use ngrok:
 - Install ngrok
 - Start it:
