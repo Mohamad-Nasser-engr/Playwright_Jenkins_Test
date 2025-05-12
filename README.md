@@ -97,7 +97,9 @@ npx playwright codegen https://example.com
 ```
 
 This command opens a browser window where you can interact with the site. As you click, type, or navigate, Playwright automatically generates Java test code in real time.
+
 Important: In the top-right corner of the recorder, change the target language to Java JUnit to ensure it generates compatible test code.
+
 The screenshot below shows an example of what the recorder looks like:
 
 ![image](https://github.com/user-attachments/assets/35989883-8197-4c9c-829c-cfbcd92da884)
