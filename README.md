@@ -264,6 +264,19 @@ Xray is a comprehensive test management tool for Jira that supports both manual 
 This integration provides end-to-end traceability, helping QA, Dev, and PM teams monitor the health of releases from within Jira itself — including test coverage, results, and defect links.
 
 *Note: Xray for Jira Cloud is a paid add-on, starting at $10/month for up to 10 users. Larger teams pay more, based on tiered Atlassian pricing*
+### Why I chose Xray:
+
+Initially I used QAlity Plus for test management due to its ease of integration with Jira and minimal setup. However, several limitations became apparent during CI/CD pipeline integration:
+- QAlity Plus did not support automatic test issue creation from Jenkins builds.
+- While it allowed changing issue statuses (e.g., from In Progress to Done), it lacked support for:
+  - Automatically identifying failed tests.
+  - Showing detailed error messages or stack traces for failed tests.
+  - Capturing test failures required writing custom scripts to extract logs from Jenkins and manually push them to Jira.
+    
+Because of these limitations, we switched to **Xray for Jira**, which provided the following improvements:  
+- Automatically creates test issues in Jira from test results in Jenkins.
+- Automatically marks tests as Passed or Failed in Jira.
+- Displays detailed error messages for each failed test without custom scripting.
 
 ### 1. Install the Xray App in JIRA:
 To begin, install Xray in your Jira Cloud instance:
