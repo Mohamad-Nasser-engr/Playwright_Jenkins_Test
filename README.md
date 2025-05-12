@@ -323,39 +323,45 @@ Additionally, you can view detailed information about failed test cases by click
 --- 
 
 ## Manually Trigerring Jenkins Jobs From JIRA:
-Manually triggering Jenkins jobs directly from JIRA allows QA or developers to initiate specific builds without switching context. This setup can be useful for on-demand testing or non-automated flows.
-
+By integrating Jira with Jenkins, you can manually trigger Jenkins jobs directly from Jira issues. This is particularly useful for on-demand testing or executing specific builds without leaving the Jira interface.
+### Prerequisites:
+- Jenkins is accessible over the internet (e.g., via an ngrok URL).
+- A Jenkins user with an API token.
+- The Jenkins job is configured to allow remote triggering.
 *Note: This section assumes you have already set up your Jenkins API token and exposed Jenkins via an ngrok URL as described in the earlier sections.*
 
-### Steps to Setup JIRA Automation Rule:
-- Navigate to JIRA Automation
-  - Go to your JIRA project → Project Settings → Automation → Create Rule
-- Configure the Trigger
-  - Select Manual trigger as the rule trigger
-  - his allows users to run the rule from a JIRA issue manually
-- Add an Action: Send Web Request
-  - Choose Send web request as the action
-- Fill in Web Request Details:
-  - Web Request URL:
+### Enable remote trigerring in Jenkins:
+  - Go to your Jenkins job
+  - Click on Configure
+  - Under Build Triggers, check Trigger builds remotely
+  - Set your Authentication Token (e.g., my-trigger-token)
+
+![image](https://github.com/user-attachments/assets/a8046af8-3209-41a6-b427-77faf009eb5e)
+
+### Create a manual trigger rule in JIRA
+- In Jira, navigate to your project.
+- Go to Project Settings → Automation.
+- Click Create Rule.
+- Select Manual trigger as the trigger.
+- Click New Action and choose Send web request.
+
+### Configure the Web request:
+- Web Request URL:
     ```
     https://<your-ngrok-url>/job/<jenkins-job-name>/build?token=<my-trigger-token>
     ```
-  Note: You must first enable the remote trigger in your Jenkins job:
-  - Go to the Jenkins job → Configure
-  - Check "Trigger builds remotely"
-  - Set your Authentication Token (e.g., my-trigger-token)
 - HTTP Method: POST
 - Headers
   - Key 1: Authorization:
     ```
     Basic <base64_encoded_credentials>
     ```
-    Replace with *base64-encoded string* of jenkins-username:jenkins-api-token
+    Replace with *base64-encoded string* of jenkins-username:jenkins-api-token (Use the following link to generate the encoded version: https://www.base64encode.org).
   - Key 2: Jenkins-Crumb:
     ```
     <crumb-value>
     ```
-    To get the crumb use the following command:
+    To get the crumb value use the following command:
     ```
     curl -u jenkinsuser:jenkins-api-token https://<your-ngrok-url>/crumbIssuer/api/json
     ```
@@ -368,23 +374,17 @@ Manually triggering Jenkins jobs directly from JIRA allows QA or developers to i
     ```
     Use the value of "crumb" as the header value, and make sure the key matches "crumbRequestField".
 
-### Using The Automation Rule:
-Once the rule is set up:
-- Open any JIRA Issue
-- Select Actions
-- Select the created Automation Rule to trigger the Jenkins job
+    ![image](https://github.com/user-attachments/assets/3c89dd18-5a41-40fb-831f-d377c6e2c6c8)
 
+### Test and Publish the Rule:
+- Click Validate to test the web request configuration.
+- If successful, click Publish to activate the rule.
+- 
+### Trigger the Jenkins Job from a Jira Issue:
+- Open a Jira issue within the project.
+- Click on the Automation button (or Actions → Automation).
+- Select the manual trigger rule you created.
+- The Jenkins job should start executing.
 
+![image](https://github.com/user-attachments/assets/299c73f2-1a90-4811-a41a-4f69a5558509)
 
-
-
-
-
-
-
-
-
-
-
-
-  
