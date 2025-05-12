@@ -193,6 +193,7 @@ This will give you a public URL like https://a1b2c3d4.ngrok.io
 - Push a change to test the setup
   
 ⚠️ Note: ngrok URLs expire unless you use a paid plan or reserved domain.
+
 ---
 
 ## Jenkins Integration with JIRA
