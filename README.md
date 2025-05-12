@@ -107,16 +107,21 @@ The screenshot below shows an example of what the recorder looks like:
 ---
 
 ## Integration with Jenkins 
-To integrate your Playwright tests with Jenkins, follow these steps to set up a continuous integration (CI) pipeline that automatically runs your tests.
+
+This section shows how to integrate your Playwright Java tests into a CI pipeline using Jenkins. The goal is to automatically run your tests every time you push code to GitHub.
 
 ### 1. Setup a GitHub Repository
+
+You’ll need your Maven project hosted on GitHub so Jenkins can pull and build it.
+
+**Steps**:
 - Create a GitHub repository
 - Clone it:
   ```bash
   git clone https://github.com/your-username/repository-name.git
   cd playwright-java-tests
   ```
-- Add your Maven project files (pom.xml, etc)
+- Add your Maven project files (pom.xml, test files, etc)
 - Commit and push:
   ```bash
   git add .
@@ -125,7 +130,7 @@ To integrate your Playwright tests with Jenkins, follow these steps to set up a 
   ```
 ### 2. Install Jenkins on Windows:
 - Go to https://www.jenkins.io/download/
-- Download the .msi installer
+- Download the .msi installer for windows
 - Run the installer and follow the setup wizard
 - Jenkins will install as a Windows service (default port: 8080 or custom one like 8443)
 Now you can access Jenkins by going to the following url:
@@ -136,6 +141,7 @@ http://localhost:<port-number>
   ```
   <Jenkins-installation-path>/secrets/initialAdminPassword
   ```
+- paste the password in the web UI
 - Finalize Jenkins Setup
   
 ### 3. Install Required Plugins
@@ -144,9 +150,11 @@ Ensure the following plugins are installed (Manage Jenkins → Manage Plugins):
 - GitHub Plugin – For GitHub webhooks and integration
 - JUnit – To publish test results
 - Maven Integration – To build Maven projects
+
 ### 4. Create and configure a new Maven Project:
 - In Jenkins, click New Item, name your job, and select Maven Project.
 - Under Source Code Management, select Git and enter your GitHub repository URL.
+- In the Build Trigger section, make sure to check “GitHub hook trigger for GITScm polling”. This allows the jenkins build to trigger after a code is pushed in the GitHub repository.
 - In the Build section:
 
   Root POM:
@@ -157,10 +165,11 @@ Ensure the following plugins are installed (Manage Jenkins → Manage Plugins):
   ```
   clean install
   ```
-  This runs your tests based on the pom.xml configuration.
-  ### Note on ***pom.xml*** for Jenkins Compatibility:
-  To ensure Jenkins can execute your Playwright tests via Maven:
-  - The project defines maven-surefire-plugin, which runs JUnit 5 tests during the test phase:
+This setup will clone your code and run your tests automatically using the pom.xml file.
+
+  ### Ensure **pom.xml** is Jenkins-Ready:
+  To ensure Jenkins can detect and execute your Playwright tests via Maven:
+  - Use the maven-surefire-plugin, which runs JUnit 5 tests during the test phase:
     ```xml
     <plugin>
       <groupId>org.apache.maven.plugins</groupId>
@@ -175,7 +184,9 @@ Ensure the following plugins are installed (Manage Jenkins → Manage Plugins):
   - Ensure your test classes follow the naming convention ***Test.java** so Surefire can detect them. If not, update includes in the plugin config.
 
 ### 5. Expose Jenkins to GitHub using ngrok (for Webhooks):
-If Jenkins is hosted locally (e.g., on http://localhost:8443), GitHub won’t be able to trigger webhooks unless it's exposed to the internet. To solve this we use ngrok:
+If Jenkins is hosted locally (e.g., on http://localhost:8443), GitHub won’t be able to trigger webhooks unless it's exposed to the internet.
+
+To solve this we use ngrok to create a public URL that links to Jenkins:
 - Install ngrok
 - Start ngrok on the Jenkins port:
 ```bash
@@ -183,7 +194,9 @@ ngrok http 8443
 ```
 This will give you a public URL like https://a1b2c3d4.ngrok.io
 
-- In GitHub:
+![image](https://github.com/user-attachments/assets/5fa0b1a1-5b2e-4de3-83d8-a901a5157f4d)
+
+- Now that we created the URL we will add it as a WebHook in GitHub:
    - Go to your repository → Settings → Webhooks → Add webhook
    - Payload URL: https://a1b2c3d4.ngrok.io/github-webhook/
    - Content type: application/json
