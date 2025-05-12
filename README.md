@@ -82,10 +82,13 @@ This step installs Playwright using the Node.js version, which is required to re
 npx playwright install 
 ```
 ### 3. Use Playwright's recorder 
-This will generate Java + JUnit code you can paste into your test classes.
+This will generate Java + JUnit code that you can paste into your test classes.
 ```bash
 npx playwright codegen https://example.com
 ```
+
+The screenshot below shows what you will see when the Playwright recorder is launched. It captures the interactions with the specified website and generates corresponding code. Make sure to change the target to "JUnit" to generate the appropriate code format.
+
 ![image](https://github.com/user-attachments/assets/35989883-8197-4c9c-829c-cfbcd92da884)
 
 ---
