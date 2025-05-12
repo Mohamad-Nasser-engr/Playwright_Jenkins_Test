@@ -6,23 +6,40 @@ This document summarizes my research on using [Microsoft Playwright](https://pla
 
 ---
 
+## Tool Evaluation and Selection Justification
+As part of my research, I evaluated several popular test automation tools: TestRigor, Mabl, Katalon Studio, Selenium, and Playwright. Each was assessed based on its features, usability, pricing, and integration capabilities.
+
+### Summary of Comparison:
+
+| Tool             | Strengths                                                                 | Limitations                                                                 |
+|------------------|---------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| **TestRigor**     | Natural language scripting, AI-powered suggestions, API testing, CI/CD ready | Recorder is **very inaccurate**, expensive (~$900/month), limited control for complex scenarios |
+| **Mabl**          | Low-code scripting, visual testing, parallel execution, cloud-based       | No free tier beyond 14-day trial, must contact sales for pricing             |
+| **Katalon Studio**| Supports UI/code test creation, good recorder, API & mobile testing       | **CI/CD integration requires paid tier**, many features behind paywall       |
+| **Selenium**      | Free and open-source, supports many languages, flexible for dev teams     | **Jenkins plugin is unstable**, lacks built-in visual/mobile/API testing, steep learning curve |
+| **Playwright**    | Free, modern, fast, supports Chromium/Firefox/WebKit, great dev experience| Limited mobile support (emulated only), no built-in AI, requires coding      |
+
+### Why I Chose Playwright
+After analyzing these tools, I chose Playwright for the following reasons:
+- Comprehensive cross-browser testing — includes Chromium, Firefox, and WebKit support out of the box.
+- Fast and modern — excellent for dynamic web apps with faster test execution than Selenium.
+- Code-first flexibility — full control for customizing complex test flows.
+- Developer-focused tools — powerful selector engine, smooth debugging, and intelligent error messages.
+- Cost-effective — fully open-source with no licensing costs.
+- CI/CD ready — seamless integration into modern pipelines with parallel execution support.
+- Native Support for Multiple Languages — Playwright supports JavaScript, Python, Java, and C#, providing flexibility to use your preferred language.
+- Headless & Headed Execution — It supports both headless and headed browser executions.
+- Auto-Wait and Smart Assertions — Playwright automatically waits for elements to be ready before interacting with them, ensuring more reliable tests.
+- Recorder Tool — Playwright’s recorder tool automatically generates tests, simplifying test creation and boosting productivity.
+
+---
+
 ## 🔧 Prerequisites
 - Java 
 - Node.js installed (for Playwright CLI tools)
 - Maven installed
 - Jenkins server set up
 - JIRA Cloud account with admin access
-
----
-
-## 🚀 Why Playwright?
-
-Playwright is an open-source test automation framework by Microsoft that supports:
-- Cross-browser testing (Chromium, Firefox, WebKit)
-- Headless & headed execution
-- Native support for multiple languages (JavaScript, Python, Java, C#)
-- Auto-wait and smart assertions
-- **Recorder tool to auto-generate tests**
 
 ---
 
@@ -142,7 +159,7 @@ Ensure the following plugins are installed (Manage Jenkins → Manage Plugins):
 ### 5. Expose Jenkins to GitHub using ngrok (for Webhooks):
 If Jenkins is hosted locally (e.g., on http://localhost:8443), GitHub won’t be able to trigger webhooks unless it's exposed to the internet. To solve this we use ngrok:
 - Install ngrok
-- Start it:
+- Start ngrok on the Jenkins port:
 ```bash
 ngrok http 8443
 ```
