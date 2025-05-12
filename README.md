@@ -35,6 +35,7 @@ After analyzing these tools, I chose Playwright for the following reasons:
 ---
 
 ## 🔧 Prerequisites
+Before getting started, ensure you have the following tools and accounts set up:
 - Java 
 - Node.js installed (for Playwright CLI tools)
 - Maven installed
@@ -85,6 +86,7 @@ This will generate Java + JUnit code you can paste into your test classes.
 ```bash
 npx playwright codegen https://example.com
 ```
+![image](https://github.com/user-attachments/assets/35989883-8197-4c9c-829c-cfbcd92da884)
 
 ---
 
