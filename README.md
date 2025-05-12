@@ -214,7 +214,7 @@ This will generate a public URL that links to Jenkins
 
 ---
 
-## Jenkins Integration with JIRA (Basic Build and Issue Tracking)
+## Jenkins Integration with JIRA
 Integrating Jenkins with JIRA allows automatic linking of build results, commits, and issues, making it easier to track development progress directly from JIRA.
 ### Steps to integrate Jenkins with JIRA
 ### 1. Install the Jenkins JIRA Plugin
@@ -259,25 +259,33 @@ To generate one:
 ---
 
 ## Xray Integration for Test Management:
-Xray is a powerful test management tool for Jira that allows teams to manage automated and manual tests directly from within Jira. We integrate Xray with Jenkins to automatically import test execution results, enabling traceability between test runs and Jira issues.
-Using Xray ensures full visibility into testing status within Jira
+Xray is a comprehensive test management tool for Jira that supports both manual and automated testing, including unit, integration, and end-to-end tests. Integrating Jenkins with Xray allows teams to automatically import test execution results, maintaining a tight link between code, test results, and Jira issues.
 
-Pricing: Xray for Jira Cloud is a paid add-on, with pricing starting at $10/month for up to 10 users. Larger teams incur additional costs.
+This integration provides end-to-end traceability, helping QA, Dev, and PM teams monitor the health of releases from within Jira itself — including test coverage, results, and defect links.
+
+*Note: Xray for Jira Cloud is a paid add-on, starting at $10/month for up to 10 users. Larger teams pay more, based on tiered Atlassian pricing*
 
 ### 1. Install the Xray App in JIRA:
+To begin, install Xray in your Jira Cloud instance:
 - In Jira, go to Apps → Explore more apps
-- Search for Xray Test Management for Jira
+- Search for **Xray Test Management** for Jira
 - Click Install
-- Once installed, it will appear in the Apps section
+- Once installed, you'll see Xray in the Jira top navigation or under Apps → Xray
+
+![image](https://github.com/user-attachments/assets/d9d2ec45-86ea-4ab9-925c-2516393418c6)
+
 ### 2. Install the Xray Plugin in Jenkins
+To enable integration between Jenkins and Xray:
 - Navigate to Jenkins Dashboard → Manage Jenkins → Plugins.
 - Search for Xray and install the plugin.
 - Restart Jenkins if required.
 ### 3. Create API Credentials in Jira:
+Xray uses Jira API tokens for secure integration. To generate one:
 - In Jira, go to Apps → Manage Apps → API Keys.
 - Click Create API Key.
 - Give it a name, and copy the generated key for later use.
 ### 4. Configure Xray in Jenkins:
+Now, connect Jenkins to Xray:
 - Go to Manage Jenkins → System → Configure System.
 - Scroll to the Xray Configuration section.
 - Fill in the following:
@@ -285,7 +293,11 @@ Pricing: Xray for Jira Cloud is a paid add-on, with pricing starting at $10/mont
   - Hosting Type: Select Cloud.
   - Credentials: Add the API Key from Step 3 as a new credential.
 - Click Test Connection to ensure everything works correctly.
+
+![image](https://github.com/user-attachments/assets/ea04c789-5b75-41c3-8fb4-555f60e32c73)
+
 ### 5. Add Xray Reporting in a Jenkins Job:
+Once the plugin is configured, add test result publishing to your build job:
 - Open your Jenkins job and click Configure.
 - Under Post-build Actions, click Add post-build action → Select Xray: Results Import Task.
 - Set the following options:
@@ -294,7 +306,19 @@ Pricing: Xray for Jira Cloud is a paid add-on, with pricing starting at $10/mont
   - Execution Report File: Enter your test report path (e.g., target/surefire-reports/*.xml).
   - JIRA Project Key: Enter the Jira project key (e.g., ABC).
   - Test Execution Key: Enter the corresponding Test Execution issue key (e.g., ABC-123).
- 
+
+  ![image](https://github.com/user-attachments/assets/686720d0-1839-4868-ae56-16fd36ba725a)
+
+Now, after the JUnit tests are executed during the Jenkins build, all the test results will be automatically imported and displayed in the specified Test Execution issue in Jira:
+
+ ![image](https://github.com/user-attachments/assets/bb1a53f5-9097-4c99-ae32-fa75ca840b76)
+
+**This provides immediate visibility into test outcomes directly within Jira, enabling better collaboration between development and QA teams.**
+
+Additionally, you can view detailed information about failed test cases by clicking the "Test Details" button located at the right of each test:
+
+![image](https://github.com/user-attachments/assets/deb6e964-1b47-41ce-8aff-7031e02aed3f)
+
 --- 
 
 ## Manually Trigerring Jenkins Jobs From JIRA:
