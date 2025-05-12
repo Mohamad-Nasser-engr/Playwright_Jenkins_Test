@@ -214,7 +214,7 @@ This will generate a public URL that links to Jenkins
 
 ---
 
-## Jenkins Integration with JIRA
+## Jenkins Integration with JIRA (Basic Build and Issue Tracking)
 Integrating Jenkins with JIRA allows automatic linking of build results, commits, and issues, making it easier to track development progress directly from JIRA.
 ### Steps to integrate Jenkins with JIRA
 ### 1. Install the Jenkins JIRA Plugin
@@ -228,24 +228,33 @@ To generate one:
 - Click Create API token
 - Enter a label like "Jenkins Integration", then click Create
 - Copy the generated token (you won’t be able to view it again)
-- In Jenkins:
-   - Go to Manage Jenkins → Credentials
-   - Click **Add Credentials**
-     - **Kind**: Username with password
-     - **Username**: Your Atlassian account email
-     - **Password**: Paste the API token
-     - **ID/Description**: Optional (e.g., jira-api-token)
-### 3. Configure JIRA site in Jenkins
+
+  ![image](https://github.com/user-attachments/assets/32bd2b04-afb5-49f3-8cec-29b5c7e0602e)
+
+### 3. Add JIRA credentials in Jenkins:
+- Go to Manage Jenkins → Credentials
+- Click **Add Credentials**
+  - **Kind**: Username with password
+  - **Username**: Your Atlassian account email
+  - **Password**: Paste the API token
+  - **ID/Description**: Optional (e.g., jira-api-token)
+
+  ![image](https://github.com/user-attachments/assets/705dc3e8-80ca-4028-a2bb-994e05789edd)
+
+### 4. Configure JIRA site in Jenkins
 - Go to Manage Jenkins → Configure System
 - Scroll to the JIRA section
 - Click Add Jira Site
     - Enter the JIRA server URL (e.g., https://yourcompany.atlassian.net)
     - Add the previously created credentials (JIRA API token)
     - Test the connection
-### 4. Link JIRA site in a Jenkins Job
+### 5. Link JIRA site in a Jenkins Job
 - Open your Jenkins Job → Configure
 - Scroll to the JIRA site section
 - Select the JIRA site you previously configured
+- This step enables Jenkins to associate builds with JIRA issues, making issue references clickable in build logs and views
+
+*Note: This integration does not automatically update JIRA issues (e.g., adding comments or changing statuses). For that, you must use additional plugins, scripted logic, or smart commits via your version control system*
 
 ---
 
