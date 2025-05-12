@@ -306,6 +306,7 @@ Once the plugin is configured, add test result publishing to your build job:
   - Execution Report File: Enter your test report path (e.g., target/surefire-reports/*.xml).
   - JIRA Project Key: Enter the Jira project key (e.g., ABC).
   - Test Execution Key: Enter the corresponding Test Execution issue key (e.g., ABC-123).
+    - Note: The Test Execution issue must already exist in Jira. If not, you'll need to create it manually before the integration works.
 
   ![image](https://github.com/user-attachments/assets/686720d0-1839-4868-ae56-16fd36ba725a)
 
