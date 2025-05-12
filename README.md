@@ -154,7 +154,7 @@ Ensure the following plugins are installed (Manage Jenkins → Manage Plugins):
 ### 4. Create and configure a new Maven Project:
 - In Jenkins, click New Item, name your job, and select Maven Project.
 - Under Source Code Management, select Git and enter your GitHub repository URL.
-- In the Build Trigger section, make sure to check “GitHub hook trigger for GITScm polling”. This allows the jenkins build to trigger after a code is pushed in the GitHub repository.
+- In the Build Trigger section, make sure to check “GitHub hook trigger for GITScm polling”. This allows Jenkins to automatically trigger a build when changes are pushed to the GitHub repository.
 - In the Build section:
 
   Root POM:
@@ -192,20 +192,25 @@ To solve this we use ngrok to create a public URL that links to Jenkins:
 ```bash
 ngrok http 8443
 ```
-This will give you a public URL like https://a1b2c3d4.ngrok.io
+This will generate a public URL that links to Jenkins
 
 ![image](https://github.com/user-attachments/assets/5fa0b1a1-5b2e-4de3-83d8-a901a5157f4d)
 
 - Now that we created the URL we will add it as a WebHook in GitHub:
    - Go to your repository → Settings → Webhooks → Add webhook
-   - Payload URL: https://a1b2c3d4.ngrok.io/github-webhook/
+   - Payload URL: <generated-ngrok-url>
    - Content type: application/json
    - Events: Choose “Just the push event”
+ 
+![image](https://github.com/user-attachments/assets/1f81ec7a-b59e-45d7-8533-5d8592f6b0c0)
+
 - In Jenkins:
    - Make sure your job is configured to trigger builds on GitHub push events
 - Push a change to test the setup
   
-⚠️ Note: ngrok URLs expire unless you use a paid plan or reserved domain.
+⚠️ Note:
+- The ngrok URL is only valid as long as the terminal window running ngrok is active. If you close the window or your system restarts, the URL will stop working.
+- Each time you restart ngrok, a new URL is generated. Don’t forget to update the GitHub webhook with the new URL.
 
 ---
 
