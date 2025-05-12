@@ -54,9 +54,15 @@ Before getting started, ensure you have the following tools and accounts set up:
 ---
 
 ## ⚙️ Installation & Setup
+This section guides you through setting up a Java project using Maven, configuring Playwright for browser automation, and using the recorder to generate test code.
 
-### 1. Add Playwright and Junit 5 to your Maven `pom.xml`:
+### 1. Create a Maven Project
+Maven is a build automation tool used primarily for Java projects. It uses a pom.xml file to manage dependencies and build configurations. If you're using an IDE like IntelliJ IDEA or Eclipse, you can create a Maven project from the "New Project" wizard.
+File -> New Project -> Maven Project
+This creates a basic Maven structure with a pom.xml file.
 
+### 2. Add Playwright and Junit 5 to your Maven `pom.xml`:
+Edit the pom.xml file to include the following dependencies. These will enable Java to work with Playwright and run JUnit 5 tests:
 ```xml
 <dependency>
   <groupId>com.microsoft.playwright</groupId>
@@ -76,18 +82,21 @@ Before getting started, ensure you have the following tools and accounts set up:
   <scope>test</scope>
 </dependency>
 ```
-### 2. Install Playwright recorder
+### 3. Install Playwright recorder
 This step installs Playwright using the Node.js version, which is required to record and generate Java test code.
 ```bash
 npx playwright install 
 ```
-### 3. Use Playwright's recorder 
-This will generate Java + JUnit code that you can paste into your test classes.
+This will download browser binaries and set up Playwright's command-line tools.
+### 4. Use Playwright's recorder 
+Now you're ready to generate Java test code using Playwright's recorder:
 ```bash
 npx playwright codegen https://example.com
 ```
 
-The screenshot below shows what you will see when the Playwright recorder is launched. It captures the interactions with the specified website and generates corresponding code. Make sure to change the target to "JUnit" to generate the appropriate code format.
+This command opens a browser window where you can interact with the site. As you click, type, or navigate, Playwright automatically generates Java test code in real time.
+Important: In the top-right corner of the recorder, change the target language to Java JUnit to ensure it generates compatible test code.
+The screenshot below shows an example of what the recorder looks like:
 
 ![image](https://github.com/user-attachments/assets/35989883-8197-4c9c-829c-cfbcd92da884)
 
