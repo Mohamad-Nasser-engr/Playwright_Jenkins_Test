@@ -64,8 +64,14 @@ File -> New Project -> Maven Project
 This creates a basic Maven structure with a pom.xml file.
 
 ### 2. Add Playwright and Junit 5 to your Maven `pom.xml`:
+In the pom.xml file specify both your source directory and your test source directory:
+```xml
+<sourceDirectory>src</sourceDirectory>
+<testSourceDirectory>test</testSourceDirectory>
+```
 Edit the pom.xml file to include the following dependencies. These will enable Java to work with Playwright and run JUnit 5 tests:
 ```xml
+<dependencies>
 <dependency>
   <groupId>com.microsoft.playwright</groupId>
   <artifactId>playwright</artifactId>
@@ -83,6 +89,7 @@ Edit the pom.xml file to include the following dependencies. These will enable J
   <version>5.8.1</version>
   <scope>test</scope>
 </dependency>
+</dependencies>
 ```
 ### 3. Install Playwright recorder
 This step installs Playwright using the Node.js version, which is required to record and generate Java test code.
