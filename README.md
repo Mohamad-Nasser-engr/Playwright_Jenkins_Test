@@ -341,6 +341,7 @@ By integrating Jira with Jenkins, you can manually trigger Jenkins jobs directly
 - Jenkins is accessible over the internet (e.g., via an ngrok URL).
 - A Jenkins user with an API token.
 - The Jenkins job is configured to allow remote triggering.
+  
 *Note: This section assumes you have already set up your Jenkins API token and exposed Jenkins via an ngrok URL as described in the earlier sections.*
 
 ### Enable remote trigerring in Jenkins:
