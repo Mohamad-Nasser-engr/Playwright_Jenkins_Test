@@ -24,7 +24,7 @@
         <version>3.0.0-M5</version>
         <configuration>
 			 <argLine>--add-opens java.base/sun.nio.fs=ALL-UNNAMED</argLine>
-			 <testFailureIgnore>false</testFailureIgnore> <!-- this must be false or omitted -->
+			 <!--<testFailureIgnore>false</testFailureIgnore>--> <!-- this must be false or omitted -->
 			<properties>
 				<configurationParameters>
 					junit.jupiter.execution.parallel.enabled=true 
