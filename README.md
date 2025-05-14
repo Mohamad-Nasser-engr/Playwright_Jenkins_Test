@@ -406,24 +406,8 @@ By integrating Jira with Jenkins, you can manually trigger Jenkins jobs directly
     Basic <base64_encoded_credentials>
     ```
     Replace with *base64-encoded string* of jenkins-username:jenkins-api-token (Use the following link to generate the encoded version: https://www.base64encode.org).
-  - Key 2: Jenkins-Crumb:
-    ```
-    <crumb-value>
-    ```
-    To get the crumb value use the following command:
-    ```
-    curl -u jenkinsuser:jenkins-api-token https://<your-ngrok-url>/crumbIssuer/api/json
-    ```
-    The response will be a JSON Object:
-    ```
-    {
-     "crumb": "abc123...",
-     "crumbRequestField": "Jenkins-Crumb"
-    }
-    ```
-    Use the value of "crumb" as the header value, and make sure the key matches "crumbRequestField".
 
-    ![image](https://github.com/user-attachments/assets/3c89dd18-5a41-40fb-831f-d377c6e2c6c8)
+    ![image](https://github.com/user-attachments/assets/37860daf-52a0-4245-b7e9-f0d99698be48)
 
 ### Test and Publish the Rule:
 - Click Validate to test the web request configuration.
