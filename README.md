@@ -155,17 +155,22 @@ You’ll need your Maven project hosted on GitHub so Jenkins can pull and build 
 
 **Steps**:
 - Create a GitHub repository
-- Clone it:
+- Go to your Maven project and initialize it:
   ```bash
-  git clone https://github.com/your-username/repository-name.git
-  cd playwright-java-tests
+  git init
+  git remote add origin https://github.com/your-username/your-repo-name.git
   ```
-- Add your Maven project files (pom.xml, test files, etc)
-- Commit and push:
+- Add, Commit and push changes for the first time:
   ```bash
   git add .
   git commit -m "Initial Playwright test setup"
-  git push -u origin
+  git push --set-upstream origin master
+  ```
+- After that each time you want to push changes:
+  ```bash
+  git add .
+  git commit -m "Commit Message"
+  git push origin
   ```
 ### 2. Install Jenkins on Windows:
 - Go to https://www.jenkins.io/download/
@@ -301,26 +306,33 @@ Because of these limitations, we switched to **Xray for Jira**, which provided t
 - Automatically marks tests as Passed or Failed in Jira.
 - Displays detailed error messages for each failed test without custom scripting.
 
-### 1. Install the Xray App in JIRA:
+### 1. Install and configure the Xray App in JIRA:
 To begin, install Xray in your Jira Cloud instance:
 - In Jira, go to Apps → Explore more apps
 - Search for **Xray Test Management** for Jira
 - Click Install
 - Once installed, you'll see Xray in the Jira top navigation or under Apps → Xray
 
-![image](https://github.com/user-attachments/assets/d9d2ec45-86ea-4ab9-925c-2516393418c6)
+### 2. Configure Xray for all needed JIRA projects:
+- Go to Apps -> Xray -> Configure Project
+- Choose your JIRA project
+- Add all Xray Issue Types
 
-### 2. Install the Xray Plugin in Jenkins
+![image](https://github.com/user-attachments/assets/a95d7e25-07ff-4e2e-b187-9a7de42ba105)
+
+Now you can create and use Xray issue types
+
+### 3. Install the Xray Plugin in Jenkins
 To enable integration between Jenkins and Xray:
 - Navigate to Jenkins Dashboard → Manage Jenkins → Plugins.
 - Search for Xray and install the plugin.
 - Restart Jenkins if required.
-### 3. Create API Credentials in Jira:
+### 4. Create API Credentials in Jira:
 Xray uses Jira API tokens for secure integration. To generate one:
 - In Jira, go to Apps → Manage Apps → API Keys.
 - Click Create API Key.
 - Give it a name, and copy the generated key for later use.
-### 4. Configure Xray in Jenkins:
+### 5. Configure Xray in Jenkins:
 Now, connect Jenkins to Xray:
 - Go to Manage Jenkins → System → Configure System.
 - Scroll to the Xray Configuration section.
@@ -332,7 +344,7 @@ Now, connect Jenkins to Xray:
 
 ![image](https://github.com/user-attachments/assets/ea04c789-5b75-41c3-8fb4-555f60e32c73)
 
-### 5. Add Xray Reporting in a Jenkins Job:
+### 6. Add Xray Reporting in a Jenkins Job:
 Once the plugin is configured, add test result publishing to your build job:
 - Open your Jenkins job and click Configure.
 - Under Post-build Actions, click Add post-build action → Select Xray: Results Import Task.
