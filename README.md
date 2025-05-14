@@ -66,8 +66,13 @@ This creates a basic Maven structure with a pom.xml file.
 ### 2. Add Playwright and Junit 5 to your Maven `pom.xml`:
 In the pom.xml file specify both your source directory and your test source directory:
 ```xml
+<build>
 <sourceDirectory>src</sourceDirectory>
 <testSourceDirectory>test</testSourceDirectory>
+<plugins>
+<!-- added any needed plugins here -->
+</plugins>
+</build>
 ```
 Edit the pom.xml file to include the following dependencies. These will enable Java to work with Playwright and run JUnit 5 tests:
 ```xml
@@ -91,6 +96,33 @@ Edit the pom.xml file to include the following dependencies. These will enable J
 </dependency>
 </dependencies>
 ```
+
+To properly run JUnit tests using Maven, you need to configure the maven-surefire-plugin in your pom.xml file. This plugin ensures that JUnit 5 tests are executed during the Maven build process.
+
+Add the following configuration for the maven-surefire-plugin:
+```xml
+    <plugins>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.1</version>
+          <configuration>
+            <release>17</release>
+          </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.0.0-M5</version>
+            <configuration>
+                <!-- Optional configurations -->
+                <includes>
+                    <include> <!--update this for different naming convention--> </include>
+                </includes>
+            </configuration>
+        </plugin>
+    </plugins>
+```
+Ensure your test classes follow the naming convention ***Test.java** so Surefire can detect them. If not, update includes in the plugin config.
 ### 3. Install Playwright recorder
 This step installs Playwright using the Node.js version, which is required to record and generate Java test code.
 ```bash
@@ -173,22 +205,6 @@ Ensure the following plugins are installed (Manage Jenkins → Manage Plugins):
   clean install
   ```
 This setup will clone your code and run your tests automatically using the pom.xml file.
-
-  ### Ensure **pom.xml** is Jenkins-Ready:
-  To ensure Jenkins can detect and execute your Playwright tests via Maven:
-  - Use the maven-surefire-plugin, which runs JUnit 5 tests during the test phase:
-    ```xml
-    <plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-surefire-plugin</artifactId>
-      <version>3.0.0-M5</version>
-      <configuration>
-      ...
-      </configuration>
-    </plugin>
-    ```
-  - The junit-jupiter-api and junit-jupiter-engine dependencies are declared with <scope>test</scope>, so tests can be discovered and run correctly.
-  - Ensure your test classes follow the naming convention ***Test.java** so Surefire can detect them. If not, update includes in the plugin config.
 
 ### 5. Expose Jenkins to GitHub using ngrok (for Webhooks):
 If Jenkins is hosted locally (e.g., on http://localhost:8443), GitHub won’t be able to trigger webhooks unless it's exposed to the internet.
