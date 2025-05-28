@@ -246,6 +246,39 @@ Parameters like corners, domain, and qrDesign are populated in earlier tests and
 Each response is asserted for status code and optionally printed for manual inspection.
 
 ---
+## Capturing Browser Console Logs with Playwright
+Monitoring the browser console for JavaScript errors is crucial in maintaining front-end reliability. Playwright provides a simple way to listen for console messages, including errors, warnings, and logs.
+
+In this test case, we attached a listener to capture all console messages. If any console.error is triggered during the execution, the test will fail and print the errors in the test output.
+
+### Console Listener Setup
+```
+page.onConsoleMessage(msg -> {
+    if ("error".equals(msg.type())) {
+        System.err.println("🚨 Console Error: " + msg.text());
+        browserErrorLogs.add("🚨 Console Error: " + msg.text());
+    } else {
+        System.out.println("📋 Console [" + msg.type() + "]: " + msg.text());
+    }
+});
+```
+Note that 'browserErrorLogs' is a 'List<String>' declared at the top of the test class to store all captured error messages.
+
+### Why This Matters:
+- Detects uncaught front-end issues (e.g., missing resources, null errors, etc.)
+- Validates that the application is not silently failing
+- Makes integration into CI (e.g., Jenkins) more robust
+
+## Final Assertion Example:
+At the end of the test, we check for collected errors:
+```
+if (!browserErrorLogs.isEmpty()) {
+    Assertions.fail("Browser console errors detected:\n" + String.join("\n", browserErrorLogs));
+}
+```
+If any browser errors were logged, the test will immediately fail, ensuring only error-free builds proceed further.
+
+---
 
 ## Integration with Jenkins 
 
@@ -514,7 +547,7 @@ By integrating Jira with Jenkins, you can manually trigger Jenkins jobs directly
 ### Test and Publish the Rule:
 - Click Validate to test the web request configuration.
 - If successful, click Publish to activate the rule.
-- 
+
 ### Trigger the Jenkins Job from a Jira Issue:
 - Open a Jira issue within the project.
 - Click on the Automation button (or Actions → Automation).
