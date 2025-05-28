@@ -141,7 +141,7 @@ Important: In the top-right corner of the recorder, change the target language t
 
 The screenshot below shows an example of what the recorder looks like:
 
-![image](https://github.com/user-attachments/assets/35989883-8197-4c9c-829c-cfbcd92da884)
+![image](https://github.com/user-attachments/assets/85f9df70-9212-4d29-af46-1661b9c4d3ca)
 
 ---
 
@@ -246,6 +246,7 @@ Parameters like corners, domain, and qrDesign are populated in earlier tests and
 Each response is asserted for status code and optionally printed for manual inspection.
 
 ---
+
 ## Capturing Browser Console Logs with Playwright
 Monitoring the browser console for JavaScript errors is crucial in maintaining front-end reliability. Playwright provides a simple way to listen for console messages, including errors, warnings, and logs.
 
@@ -277,6 +278,8 @@ if (!browserErrorLogs.isEmpty()) {
 }
 ```
 If any browser errors were logged, the test will immediately fail, ensuring only error-free builds proceed further.
+
+![image](https://github.com/user-attachments/assets/c1f1f720-24ad-49d4-94e4-804ce938115b)
 
 ---
 
