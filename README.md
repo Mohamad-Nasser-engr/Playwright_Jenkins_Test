@@ -421,3 +421,104 @@ By integrating Jira with Jenkins, you can manually trigger Jenkins jobs directly
 
 ![image](https://github.com/user-attachments/assets/299c73f2-1a90-4811-a41a-4f69a5558509)
 
+---
+
+## API Testing Using Playwright
+Playwright is widely known for browser automation, but it also provides robust support for API testing through its APIRequestContext. This allows developers to validate backend services directly—without needing a browser UI—by sending HTTP requests and asserting responses. Below is a summary of how Playwright was used to test various backend API endpoints. 
+
+### Setup:
+We initialize a Playwright instance and create an APIRequestContext object, which allows us to perform HTTP requests.
+
+```
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)   // Enables ordered execution of test methods
+public class ApiQrowntechTest {
+    static Playwright playwright;
+    static APIRequestContext apiRequest;
+
+    // Variables to be used in future tests
+    static boolean corners;
+    static boolean domain;
+    static int qrDesign;
+    static String backgroundColor;
+    static String foregroundColor;
+
+@BeforeAll
+    static void setup() throws Exception {
+        // Initialize Playwright
+        playwright = Playwright.create();
+        // Setup APIRequestContext with baseURL and cookie header
+        apiRequest = playwright.request().newContext(new APIRequest.NewContextOptions()
+                     .setBaseURL("https://qrdafd.qrowntech.io")  // optional
+);
+}
+
+@AfterAll
+    static void teardown() {
+        apiRequest.dispose();
+        playwright.close();
+    }
+
+// Add tests Here
+...
+}
+```
+
+### Test Structure:
+We used JUnit 5 annotations to structure our tests. Each test corresponds to a specific API endpoint on the Qrowntech platform. Tests are ordered to ensure proper setup before dependent calls are made.
+### Example: GET Request – Fetching Dynamic Configuration
+```
+@Test
+    @Order(4) // This indicates that this will be the 4th test executed 
+    void testGetReturnConfigurations() {
+        String url = "https://qrdafd.qrowntech.io/dev/doctmgmt/returnConfiguration";
+        APIResponse response = apiRequest.get(url);
+        assertEquals(200, response.status());
+
+        String body = response.text();       
+        
+     // Parse the JSON array and store responses in variables to be used later
+        JsonArray configArray = JsonParser.parseString(body).getAsJsonArray();
+        if (!configArray.isEmpty()) {
+            JsonObject config = configArray.get(0).getAsJsonObject(); // Use the first object
+            corners = config.get("corners").getAsBoolean();
+            domain = config.get("domain").getAsBoolean();
+            qrDesign = config.get("qr_design").getAsInt();
+            backgroundColor = config.get("background_color").getAsString();
+            foregroundColor = config.get("foreground_color").getAsString();  
+        }
+    }
+```
+### Example: POST Request with Dynamic JSON Body:
+This test sends a POST request to generate a QR preview using parameters captured from previous GET requests.
+```
+@Test
+@Order(8)
+void testGenerateQrPreview() {
+    String jsonBody = String.format("""
+        {
+            "id_in_qr": false,
+            "corners": %b,
+            "authenticator": null,
+            "domain": %b,
+            "group_by_customer": null,
+            "background_color": "%s",
+            "foreground_color": "%s",
+            "logo_content": null,
+            "qr_design": "%d"
+        }
+    """, corners, domain, backgroundColor, foregroundColor, qrDesign);  // Variables (e.g., corners, domain) are populated in testGetReturnConfigurations()
+
+    APIResponse response = apiRequest.post("https://.../generateQrPreview",
+        RequestOptions.create().setHeader("Content-Type", "application/json").setData(jsonBody)
+    );
+
+    assertEquals(200, response.status());
+    String body = response.text();
+}
+```
+
+### Reusability and Maintainability:
+- Dynamic JSON Construction:
+Parameters like corners, domain, and qrDesign are populated in earlier tests and reused for more complex request bodies.
+- Assertion & Debugging:
+Each response is asserted for status code and optionally printed for manual inspection.
