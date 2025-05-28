@@ -141,7 +141,7 @@ Important: In the top-right corner of the recorder, change the target language t
 
 The screenshot below shows an example of what the recorder looks like:
 
-![image](https://github.com/user-attachments/assets/85f9df70-9212-4d29-af46-1661b9c4d3ca)
+![image](https://github.com/user-attachments/assets/d5d5f4e5-00c3-4903-a669-7a1f53e7c5f5)
 
 ---
 
